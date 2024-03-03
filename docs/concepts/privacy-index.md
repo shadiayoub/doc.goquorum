@@ -8,9 +8,11 @@ slug: privacy
 
 Privacy refers to the ability to keep transactions private between the involved participants. Other participants can't access the transaction content.
 
+> :::info Metacces privacy feature is disabled at this stage and will be enabled whenever it is required. :::
+
 ## Private transaction manager
 
-GoQuorum uses [Tessera](https://docs.tessera.consensys.net/en/stable/) as the private transaction manager to implement private transactions.
+Metacces uses [Tessera](https://docs.tessera.consensys.net/en/stable/) as the private transaction manager to implement private transactions.
 
 Tessera:
 
@@ -30,7 +32,7 @@ The separation of duties between the private transaction manager and enclave pro
 
 ## Public and private state
 
-GoQuorum supports two states:
+Metacces supports two states:
 
 - Public state, which is accessible by all nodes within the network
 - Private state, which is only accessible by nodes with the correct permissions
@@ -41,7 +43,7 @@ Nodes can only execute private transactions if they can access and decrypt the p
 
 ### Privacy enhancements and private state validation
 
-When [privacy enhancements](./privacy/privacy-enhancements.md) are enabled and [private state validation (PSV)](./privacy/privacy-enhancements.md#private-state-validation) transactions are used, the GoQuorum node automatically verifies a contract's state across participating nodes.
+When [privacy enhancements](./privacy/privacy-enhancements.md) are enabled and [private state validation (PSV)](./privacy/privacy-enhancements.md#private-state-validation) transactions are used, the Metacces node automatically verifies a contract's state across participating nodes.
 
 ## Privacy marker transactions
 

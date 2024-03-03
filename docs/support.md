@@ -3,12 +3,12 @@ title: GoQuorum support plans
 description: GoQuorum support plans
 ---
 
-# GoQuorum support
+# Metacces support
 
-Need help on using GoQuorum? Ask our community or visit [Quorum Blockchain Service](https://consensys.net/quorum/qbs/) for more information on support services.
+Need help on using Metacces? Ask our community or contact our team.
 
 ## Community support
 
-- [Discord](https://discord.com/invite/consensys)
-- [ConsenSys Quorum site](https://consensys.net/quorum/)
-- [Create an issue on the repository](https://github.com/ConsenSys/quorum/issues)
+- Discord
+- ConsenSys Quorum site
+- Create an issue on the repository

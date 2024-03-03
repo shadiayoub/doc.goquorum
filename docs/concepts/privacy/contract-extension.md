@@ -18,10 +18,6 @@ When extending a contract state to a node, the contract state at the time of the
 
 :::
 
-## Enhanced network permissioning
-
-If the network is running with [enhanced network permissioning](../permissions-overview.md#enhanced-network-permissioning), only a network or organization administrator can initiate or accept a contract extension.
-
 ## Flow
 
 The following diagram describes the flow of contract state extension. ![contract state extension diagram](../../images/ContractStateExtension.png)
@@ -42,7 +38,7 @@ In this example, Node A extends an existing private contract to Nodes C that was
    - **2d** - Node A approves the extension with the hash generated (in step 2b).
    - **2e & 2f** - Private transaction payload is shared with the Tessera nodes of all participants. Public state is propagated across all nodes.
 
-3. Since the state sharing does not execute the transactions that generate the state (in order to keep history private), there is no proof that can be provided by the proposer that the state is correct. In order to remedy this, the receiver must accept the proposal for the contract as the proof. In this step, the user of node C, as the receiving address, approves the contract extension using GoQuorum APIs.
+3. Since the state sharing does not execute the transactions that generate the state (in order to keep history private), there is no proof that can be provided by the proposer that the state is correct. In order to remedy this, the receiver must accept the proposal for the contract as the proof. In this step, the user of node C, as the receiving address, approves the contract extension using Metacces APIs.
 
    - **3a** - Node C calls its local Tessera node to encrypt the management contract address.
    - **3b** - Node C sends a private transaction to all participants with the encrypted payload from the previous step to generate a random hash for the approval process.
