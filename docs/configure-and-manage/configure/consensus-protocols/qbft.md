@@ -122,25 +122,27 @@ You can't use the JSON-RPC methods to add or remove validators when using a smar
 
 You can migrate an existing [IBFT](ibft.md) network to a QBFT network with the following steps:
 
-1.  Stop all nodes in the network.
-2.  Update the genesis file with a suitable transition block, this needs to be far enough in the future so that you can co-ordinate ahead of time. For example, if the current block number in your IBFT network is 100, set transition block to any block greater than 100, and once that fork block is reached, QBFT consensus will be used instead of IBFT.
+1. Stop all nodes in the network.
 
-    ```json title="Sample QBFT genesis file"
-    ...
-    "istanbul": {
-        "epoch": 30000,
-        "policy": 0,
-        "ceil2Nby3Block": 0
-      },
-      "transitions": [{
-        "block": 120,
-        "algorithm": "qbft"
-      }]
-    ...
-    ```
+2. Update the genesis file with a suitable transition block, this needs to be far enough in the future so that you can co-ordinate ahead of time. For example, if the current block number in your IBFT network is 100, set transition block to any block greater than 100, and once that fork block is reached, QBFT consensus will be used instead of IBFT.
 
-3.  run `geth init` with the new genesis file
-4.  Restart the network with the updated genesis file.
+   ```json title="Sample QBFT genesis file"
+   ...
+   "istanbul": {
+       "epoch": 30000,
+       "policy": 0,
+       "ceil2Nby3Block": 0
+     },
+     "transitions": [{
+       "block": 120,
+       "algorithm": "qbft"
+     }]
+   ...
+   ```
+
+3. run `geth init` with the new genesis file
+
+4. Restart the network with the updated genesis file.
 
 ## Transitions
 
@@ -156,17 +158,16 @@ Do not specify a transition block in the past. Specifying a transition block in 
 
 To update an existing network with a new `blockperiodseconds`:
 
-1.  Stop all nodes in the network.
-2.  In the [genesis file](#genesis-file), add the `transitions` configuration item where:
+1. Stop all nodes in the network.
+2. In the [genesis file](#genesis-file), add the `transitions` configuration item where:
 
-    - `<FutureBlockNumber>` is the upcoming block at which to change `blockperiodseconds`.
-    - `<NewValue>` is the updated value for `blockperiodseconds`.
+   - `<FutureBlockNumber>` is the upcoming block at which to change `blockperiodseconds`.
+   - `<NewValue>` is the updated value for `blockperiodseconds`.
 
-    <br />
+   <br />
 
 <Tabs>
   <TabItem value="Syntax" label="Syntax" default>
-
     ```json
     {
       "config": {
@@ -184,10 +185,9 @@ To update an existing network with a new `blockperiodseconds`:
       ...
     }
     ```
-
   </TabItem>
-  <TabItem value="Example" label="Example" >
 
+  <TabItem value="Example" label="Example">
     ```json
     {
       "config": {
@@ -205,13 +205,12 @@ To update an existing network with a new `blockperiodseconds`:
     ...
     }
     ```
-  
   </TabItem>
 </Tabs>
 
-3.  run `geth init` with the new genesis file
-4.  Restart all nodes in the network using the updated genesis file.
-5.  To verify the changes after the transition block, call [`istanbul_getValidators`](../../../reference/api-methods.md#istanbul_getvalidators), specifying `latest`.
+1. run `geth init` with the new genesis file
+2. Restart all nodes in the network using the updated genesis file.
+3. To verify the changes after the transition block, call [`istanbul_getValidators`](../../../reference/api-methods.md#istanbul_getvalidators), specifying `latest`.
 
 ### Configure empty block period
 
@@ -286,54 +285,60 @@ To configure rewards, add a `transitions` configuration item and set the followi
 - `beneficiaryMode` is `"fixed"` for a fixed single account or `"validator"` for the validator that validates that block. This applies to both transaction cost rewards and block rewards.
 
 <Tabs>
-
-  <TabItem value="Single account no block reward" label="Single account no block reward" default>
-
-```json
-"transitions": [{
-  "block": ...,
-  "miningBeneficiary": "0x...",
-  "beneficiaryMode":"fixed"
-}]
-```
-
+  <TabItem
+    value="Single account no block reward"
+    label="Single account no block reward"
+    default
+  >
+    ```json
+    "transitions": [{
+      "block": ...,
+      "miningBeneficiary": "0x...",
+      "beneficiaryMode":"fixed"
+    }]
+    ```
   </TabItem>
-  <TabItem value="Validators no block rewards" label="Validators no block rewards" >
 
-```json
-"transitions": [{
-  "block": ...,
-  "beneficiaryMode": "validator"
-}]
-```
-
+  <TabItem
+    value="Validators no block rewards"
+    label="Validators no block rewards"
+  >
+    ```json
+    "transitions": [{
+      "block": ...,
+      "beneficiaryMode": "validator"
+    }]
+    ```
   </TabItem>
 </Tabs>
 
 <Tabs>
-
-  <TabItem value="Single account with block reward" label="Single account with block reward" default>
-
-```json
-"transitions": [{
-  "block": ...,
-  "blockReward": "0xc",
-  "miningBeneficiary": "0x...",
-  "beneficiaryMode":"fixed"
-}]
-```
-
+  <TabItem
+    value="Single account with block reward"
+    label="Single account with block reward"
+    default
+  >
+    ```json
+    "transitions": [{
+      "block": ...,
+      "blockReward": "0xc",
+      "miningBeneficiary": "0x...",
+      "beneficiaryMode":"fixed"
+    }]
+    ```
   </TabItem>
-  <TabItem value="Validators with block rewards" label="Validators with block rewards" >
 
-```json
-"transitions": [{
-  "block": ...,
-  "blockReward": "13",
-  "beneficiaryMode": "validator"
-}]
-```
-
+  <TabItem
+    value="Validators with block rewards"
+    label="Validators with block rewards"
+  >
+    ```json
+    "transitions": [{
+      "block": ...,
+      "blockReward": "13",
+      "beneficiaryMode": "validator"
+    }]
+    ```
   </TabItem>
 </Tabs>
 
@@ -341,19 +346,17 @@ To configure rewards, add a `transitions` configuration item and set the followi
 
 To swap between block header validator selection and contract validator selection methods in an existing network:
 
-1.  Stop all nodes in the network.
-2.  In the [genesis file](#genesis-file), add the `transitions` configuration item where:
+1. Stop all nodes in the network.
+2. In the [genesis file](#genesis-file), add the `transitions` configuration item where:
 
-    - `<FutureBlockNumber>` is the upcoming block at which to change the validator selection method.
-    - `<SelectionMode>` is the validator selection mode to switch to. Valid options are `contract` and `blockheader`.
-    - `<ContractAddress>` is the smart contract address, if switching to the contract validator selection method.
+   - `<FutureBlockNumber>` is the upcoming block at which to change the validator selection method.
+   - `<SelectionMode>` is the validator selection mode to switch to. Valid options are `contract` and `blockheader`.
+   - `<ContractAddress>` is the smart contract address, if switching to the contract validator selection method.
 
-    <br />
+   <br />
 
 <Tabs>
-
   <TabItem value="Syntax" label="Syntax" default>
-
     ```json
     {
       "config": {
@@ -372,10 +375,9 @@ To swap between block header validator selection and contract validator selectio
       ...
     }
     ```
-
   </TabItem>
-  <TabItem value="Example" label="Example" >
 
+  <TabItem value="Example" label="Example">
     ```json
     {
       "config": {
@@ -394,8 +396,7 @@ To swap between block header validator selection and contract validator selectio
       ...
     }
     ```
-    
   </TabItem>
 </Tabs>
 
-3.  [Restart all nodes](../../../tutorials/private-network/create-qbft-network.md#5-initialize-nodes) in the network using the updated genesis file.
+1. [Restart all nodes](../../../tutorials/private-network/create-qbft-network.md#5-initialize-nodes) in the network using the updated genesis file.

@@ -7,16 +7,7 @@ sidebar_position: 1
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-
 # Connect to a node
-
-## Prerequisites
-
-Set up a GoQuorum network using one of the following tutorials:
-
-- The [Quorum Developer Quickstart](../tutorials/quickstart-index.md)
-- [Create a private network](../tutorials/private-network/create-ibft-network.md)
-- [Create a privacy-enabled network](../tutorials/create-privacy-enabled-network.md)
 
 ## Use `geth attach`
 
@@ -26,38 +17,33 @@ Run the `attach` subcommand and connect to the IPC socket, or, if enabled, to th
 
 <Tabs>
   <TabItem value="IPC socket" label="IPC socket" default>
-
-
-```bash
-geth attach /path/to/geth.ipc
-```
+    ```bash
+    geth attach /path/to/geth.ipc
+    ```
   </TabItem>
-  <TabItem value="RPC API endpoint" label="RPC API endpoint" default>
 
-```bash
-geth attach http://host:8545  # connect over HTTP
-```
-  </TabItem>
-  <TabItem value="WebSocket API endpoint" label="WebSocket API endpoint" default>
+{' '}
+<TabItem value="RPC API endpoint" label="RPC API endpoint" default>
+  ```bash geth attach http://host:8545 # connect over HTTP ```
+</TabItem>
 
-```bash
-geth attach ws://host:8546    # connect over websocket
-```
+{' '}
+<TabItem value="WebSocket API endpoint" label="WebSocket API endpoint" default>
+  ```bash geth attach ws://host:8546 # connect over websocket ```
+</TabItem>
 
-  </TabItem>
   <TabItem value="Geth console result" label="Geth console result" default>
+    ```text
+    Welcome to the Geth JavaScript console!
 
-```text
-Welcome to the Geth JavaScript console!
+    instance: Geth/node1-/v1.9.24-stable-d5ef77ca(quorum-v21.7.1)/linux-amd64/go1.15.5
+    coinbase: 0x93917cadbace5dfce132b991732c6cda9bcc5b8a
+    at block: 8 (Wed Oct 27 2021 03:36:02 GMT+0000 (UTC))
+    datadir: /data
+    modules: admin:1.0 debug:1.0 eth:1.0 istanbul:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
 
-instance: Geth/node1-/v1.9.24-stable-d5ef77ca(quorum-v21.7.1)/linux-amd64/go1.15.5
-coinbase: 0x93917cadbace5dfce132b991732c6cda9bcc5b8a
-at block: 8 (Wed Oct 27 2021 03:36:02 GMT+0000 (UTC))
-datadir: /data
-modules: admin:1.0 debug:1.0 eth:1.0 istanbul:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
-
-To exit, press ctrl-d
-```
+    To exit, press ctrl-d
+    ```
 
   </TabItem>
 </Tabs>
@@ -66,23 +52,20 @@ Once connected you can execute commands as normal. For example, check existing v
 
 <Tabs>
   <TabItem value="Geth console request" label="Geth console request" default>
-
-```javascript
-istanbul.getValidators();
-```
-
+    ```javascript
+    istanbul.getValidators();
+    ```
   </TabItem>
+
   <TabItem value="JSON result" label="JSON result" default>
-
-```json
-[
-  "0x27a97c9aaf04f18f3014c32e036dd0ac76da5f18",
-  "0x93917cadbace5dfce132b991732c6cda9bcc5b8a",
-  "0x98c1334496614aed49d2e81526d089f7264fed9c",
-  "0xce412f988377e31f4d0ff12d74df73b51c42d0ca"
-]
-```
-
+    ```json
+    [
+      "0x27a97c9aaf04f18f3014c32e036dd0ac76da5f18",
+      "0x93917cadbace5dfce132b991732c6cda9bcc5b8a",
+      "0x98c1334496614aed49d2e81526d089f7264fed9c",
+      "0xce412f988377e31f4d0ff12d74df73b51c42d0ca"
+    ]
+    ```
   </TabItem>
 </Tabs>
 
@@ -96,7 +79,7 @@ exit;
 
 You can connect to a running node by making HTTP REST requests on the RPC endpoint, which is exposed on port 8545 by default.
 
-To enable the RPC interface, start the GoQuorum node with the following parameters:
+To enable the RPC interface, start the Metacces node with the following parameters:
 
 ```bash
 --http                           # Enable the HTTP-RPC server endpoint
@@ -107,32 +90,29 @@ To enable the RPC interface, start the GoQuorum node with the following paramete
 --http.api admin,db,...          # APIs offered over the HTTP-RPC interface
 ```
 
-GoQuorum supports the [standard web3 JSON-RPC APIs](https://geth.ethereum.org/docs/rpc/server) and [custom methods](../reference/api-methods.md).
+Metacces supports the [standard web3 JSON-RPC APIs](https://geth.ethereum.org/docs/rpc/server) and [custom methods](../reference/api-methods.md).
 
 For example, run the following command to get the list of validators at a given block in an IBFT or QBFT network:
 
 <Tabs>
   <TabItem value="curl HTTP request" label="curl HTTP request" default>
-
-```bash
-curl -X POST http://localhost:8545 --data '{"jsonrpc":"2.0","method":"istanbul_getValidators","params":[10],"id":1}' --header "Content-Type: application/json"
-```
-
+    ```bash
+    curl -X POST http://localhost:8545 --data '{"jsonrpc":"2.0","method":"istanbul_getValidators","params":[10],"id":1}' --header "Content-Type: application/json"
+    ```
   </TabItem>
+
   <TabItem value="JSON result" label="JSON result" default>
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": [
-    "0x89205a3a3b2a69de6dbf7f01ed13b2108b2c43e7",
-    "0x71c7656ec7ab88b098defb751b7401b5f6d8976f",
-    "0xdc25ef3F5b8a186998338a2ada83795fba2d695"
-  ]
-}
-```
-
+    ```json
+    {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": [
+        "0x89205a3a3b2a69de6dbf7f01ed13b2108b2c43e7",
+        "0x71c7656ec7ab88b098defb751b7401b5f6d8976f",
+        "0xdc25ef3F5b8a186998338a2ada83795fba2d695"
+      ]
+    }
+    ```
   </TabItem>
 </Tabs>
 
@@ -148,7 +128,7 @@ Use the [security plugin](../develop/json-rpc-apis.md) to secure the JSON-RPC se
 
 You can connect to a running node using a WebSocket endpoint, which is exposed on port 8546 by default.
 
-To enable the WebSocket interface, start the GoQuorum node with the following parameters:
+To enable the WebSocket interface, start the Metacces node with the following parameters:
 
 ```bash
 --ws                           # Enable the WS-RPC server endpoint
@@ -162,13 +142,13 @@ To enable the WebSocket interface, start the GoQuorum node with the following pa
 For example, to connect to an endpoint and get logs, run the following JavaScript:
 
 ```javascript
-const Web3 = require("web3");
-var web3 = new Web3("wss://localhost:8546");
+const Web3 = require('web3');
+var web3 = new Web3('wss://localhost:8546');
 var subscription = web3.eth.subscribe(
-  "logs",
+  'logs',
   {
-    address: "0x123456..",
-    topics: ["0x12345..."],
+    address: '0x123456..',
+    topics: ['0x12345...'],
   },
   function (error, result) {
     if (!error) console.log(result);
