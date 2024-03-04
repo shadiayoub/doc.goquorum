@@ -23,7 +23,7 @@ Properties of the QBFT consensus protocol are:
 
 QBFT has immediate finality. When using QBFT there are no forks and all valid blocks get included in the main chain.
 
-### Minimum number of validators
+### Number of validators
 
 To be Byzantine fault tolerant, QBFT and IBFT require a minimum of four validators. Byzantine fault tolerance is the ability to function correctly and reach consensus despite nodes failing or propagating incorrect information to peers.
 
